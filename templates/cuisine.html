@@ -1,0 +1,121 @@
+{% extends "base.html" %} {% block title %} Cuisine Page {% endblock %} {% block
+main %}
+
+<!-- start of cuisine -->
+
+<div class="my-3 text-left">
+  <h2 class="mb-3 fw-6 text-capitalize">
+    welcome, Foodies
+    <span class="wave noto" style="color: #ebad39">&#128519;</span>
+  </h2>
+  <h5>What are your cooking goals?</h5>
+</div>
+
+
+  <!-- START search Food -->
+
+  <form action="/searchBox" method="GET" autocomplete="off">
+    <div class="form-floating px-1 field mb-3">
+      <input
+        type="text"
+        class="border-1 me-2 form-control form-control-sm text-flex"
+        name="user_input"
+        id="floatingInputGrid"
+        placeholder="Find any recipe here"
+      /><label for="floatingInputGrid">Find any recipe here</label>
+
+      <div class="text-center">
+        <input
+          type="submit"
+          id="search"
+          value="Search"
+          class="px-5 py-3 btn btn-primary"
+        />
+      </div>
+    </div>
+  </form>
+
+  <!-- END  search Food  -->
+</div>
+
+<br /><br />
+
+<center>
+  <h5>PERSONALIZE YOUR EXPERIENCE</h5>
+  <h2 class="mb-3 fw-6 text-capitalize">Do you follow any of these diets ?</h2>
+</center>
+
+<br /><br />
+
+<form action="/open" method="GET" autocomplete="off">
+  <section class="category">
+    {% for mins in minstime %}
+
+    <button
+      type="submit"
+      class="box"
+      id="{{mins}}"
+      name="parameter"
+      value="{{mins}}"
+    >
+      <h3>{{mins}}</h3></button
+    >{% endfor %}
+  </section>
+</form>
+
+<br /><br />
+
+<center>
+  <h5>CATEGORY BASED RECOMMENDATIONS</h5>
+  <h2 class="mb-3 fw-6 text-capitalize">
+    What are your favorite cuisines ?
+    <span class="wave noto" style="color: #ebad39">&#127859;</span>
+  </h2>
+</center>
+
+<br /><br />
+
+<!-- cuisines -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for cuisine in cuisinetype691|sort %}
+  <div class="col">
+    <div class="card">
+      <img
+        src="{{cuisinetype691[cuisine]}}"
+        class="card-img-top"
+        alt="{{cuisinetype691[cuisine]}} Loading..."
+      />
+      <form action="/open" method="GET" autocomplete="off">
+        <div class="card-body">
+          <center>
+            <input
+              class="px-5 py-3 btn btn-primary text-flex"
+              type="submit"
+              id="{{cuisine}}"
+              name="parameter"
+              value="{{cuisine}}"
+            />
+          </center>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- end of cuisine -->
+
+<!-- To top -->
+<button
+  type="button"
+  class="btn btn-danger btn-floating btn-lg"
+  id="btn-back-to-top"
+>
+<i class="bi bi-arrow-up"></i>
+</button>
+{% endblock %} {% block script %}
+<script>
+  {% include 'js/toggle.js' %}
+  {% include 'js/toTop.js' %}
+</script>
+{% endblock%}
